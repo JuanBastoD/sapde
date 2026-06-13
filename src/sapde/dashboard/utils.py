@@ -16,30 +16,32 @@ _RAIZ = Path(__file__).resolve().parents[3]
 _MODELS_DIR = _RAIZ / "models"
 _SHAP_REPORT = _RAIZ / "reports" / "shap" / "shap_resumen.json"
 
-# Orden canónico de las 25 features
+# Orden canónico de las 25 features — debe coincidir con el orden de columnas
+# producido por etl_python() + agregar_features_avanzadas() (obtenido de preparar_dataset_ml)
 FEATURE_NAMES: list[str] = [
     "semestre", "promedio_semestre", "promedio_acumulado",
     "tendencia_calificaciones", "creditos_matriculados", "creditos_aprobados",
     "porcentaje_avance_real", "num_asignaturas_reprobadas", "tasa_reprobacion",
-    "semestres_cursados", "interrupciones_previas", "ratio_aprobacion",
-    "deficit_creditos", "score_riesgo_bruto", "anio_cohorte", "semestre_cohorte",
+    "semestres_cursados", "interrupciones_previas",
+    "anio_cohorte", "semestre_cohorte",          # el ETL las pone antes de ratio/deficit
+    "ratio_aprobacion", "deficit_creditos", "score_riesgo_bruto",
     "nota_x_avance", "repro_x_deficit", "flag_nota_critica", "flag_reprobacion",
     "flag_rezago", "flag_tendencia_neg", "flag_interrupcion",
     "semestre_sq", "n_factores_riesgo",
 ]
 
 NIVELES_COLOR = {
-    "muy_alto": "#e74c3c",
-    "alto":     "#e67e22",
-    "moderado": "#f1c40f",
-    "bajo":     "#27ae60",
+    "muy_alto": "#C62828",
+    "alto":     "#E65100",
+    "moderado": "#B8860B",
+    "bajo":     "#2E7D32",
 }
 
-NIVEL_EMOJI = {
-    "muy_alto": "🔴",
-    "alto":     "🟠",
-    "moderado": "🟡",
-    "bajo":     "🟢",
+NIVEL_ETIQUETA = {
+    "muy_alto": "Muy Alto",
+    "alto":     "Alto",
+    "moderado": "Moderado",
+    "bajo":     "Bajo",
 }
 
 
@@ -66,14 +68,14 @@ def cargar_modelo():
 
 
 @st.cache_resource(show_spinner="Inicializando SHAP...")
-def cargar_explainer(pipeline, feature_names: list[str]):
+def cargar_explainer(_pipeline, feature_names: list[str]):
     from sapde.explain.shap_explainer import ExplicadorSHAP
-    from sapde.etl.procesador import procesar_datos
+    from sapde.etl.fallback import etl_python
     from sapde.features.engineering import preparar_dataset_ml
 
     csv = _RAIZ / "data" / "raw" / "estudiantes_sintetico.csv"
     df_raw = pd.read_csv(csv)
-    df_etl = procesar_datos(df_raw)
+    df_etl = etl_python(df_raw, n_jobs=1)
     X, _ = preparar_dataset_ml(df_etl, incluir_features_avanzadas=True)
     X = X[feature_names]
 
@@ -81,10 +83,10 @@ def cargar_explainer(pipeline, feature_names: list[str]):
     idx = rng.choice(len(X), size=min(300, len(X)), replace=False)
     X_bg = X.values[idx]
 
-    meta_nombre = pipeline.named_steps["modelo"].__class__.__name__
+    meta_nombre = _pipeline.named_steps["modelo"].__class__.__name__
     return ExplicadorSHAP(
         nombre=meta_nombre,
-        pipeline=pipeline,
+        pipeline=_pipeline,
         feature_names=feature_names,
         X_background=X_bg,
         n_background=200,
