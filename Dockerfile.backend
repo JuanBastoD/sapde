@@ -1,0 +1,44 @@
+# ============================================================
+# SAPDE — Imagen Docker: API FastAPI
+# ============================================================
+FROM python:3.12-slim
+
+LABEL maintainer="SAPDE — Universidad de Pamplona" \
+      description="API FastAPI para predicción de deserción estudiantil"
+
+# Variables de entorno internas
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app/src \
+    PORT=8000
+
+WORKDIR /app
+
+# Dependencias del sistema
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        libpq-dev \
+        gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Instalar dependencias Python (capa cacheada si requirements.txt no cambia)
+COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
+
+# Copiar código fuente
+COPY src/ src/
+
+# Directorios montados en runtime (models, data, logs)
+RUN mkdir -p models data/processed data/raw logs
+
+# Usuario no-root para producción
+RUN useradd -m -u 1000 sapde \
+    && chown -R sapde:sapde /app
+USER sapde
+
+EXPOSE ${PORT}
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:${PORT}/health')" || exit 1
+
+CMD ["uvicorn", "sapde.api.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]

@@ -1,0 +1,29 @@
+{
+  "nombre": "MLP",
+  "version": 1,
+  "timestamp": "2026-06-12T19:58:45.619917",
+  "umbral": 0.20163312480738352,
+  "metricas": {
+    "modelo": "MLP",
+    "precision": 0.1137,
+    "recall": 0.6941,
+    "f1_score": 0.1954,
+    "accuracy": 0.7712,
+    "auc_roc": 0.8188,
+    "auc_pr": 0.1448,
+    "umbral": 0.2016,
+    "t_entrenamiento_s": 216.767,
+    "TP": 59,
+    "TN": 1579,
+    "FP": 460,
+    "FN": 26
+  },
+  "mejores_params": {
+    "modelo__learning_rate_init": 0.001,
+    "modelo__hidden_layer_sizes": [
+      64
+    ],
+    "modelo__alpha": 0.01
+  },
+  "archivo": "C:\\Users\\Juanes\\Documents\\Universidad\\9no\\fcpd\\Proyecto\\sapde\\models\\MLP_v1.joblib"
+}

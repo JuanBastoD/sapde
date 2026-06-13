@@ -1,0 +1,28 @@
+{
+  "nombre": "LightGBM",
+  "version": 1,
+  "timestamp": "2026-06-12T20:12:46.611051",
+  "umbral": 0.2500467642580448,
+  "metricas": {
+    "modelo": "LightGBM",
+    "precision": 0.0929,
+    "recall": 0.8588,
+    "f1_score": 0.1676,
+    "accuracy": 0.6587,
+    "auc_roc": 0.8338,
+    "auc_pr": 0.1385,
+    "umbral": 0.25,
+    "t_entrenamiento_s": 36.583,
+    "TP": 73,
+    "TN": 1326,
+    "FP": 713,
+    "FN": 12
+  },
+  "mejores_params": {
+    "modelo__num_leaves": 15,
+    "modelo__n_estimators": 200,
+    "modelo__min_child_samples": 20,
+    "modelo__learning_rate": 0.01
+  },
+  "archivo": "C:\\Users\\Juanes\\Documents\\Universidad\\9no\\fcpd\\Proyecto\\sapde\\models\\LightGBM_v1.joblib"
+}

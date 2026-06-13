@@ -1,0 +1,66 @@
+# ============================================================
+# SAPDE — .dockerignore
+# ============================================================
+
+# Entorno virtual
+.venv/
+venv/
+*.egg-info/
+
+# Cache Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Tests y cobertura
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Artefactos de modelos (se montan como volumen en runtime)
+models/
+
+# Datos (se montan como volumen)
+data/raw/
+data/interim/
+data/processed/
+
+# Reportes (se montan como volumen)
+reports/
+
+# Logs
+logs/
+
+# Notebooks
+notebooks/
+
+# ETL C++
+etl_cpp/
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Variables de entorno locales
+.env
+*.env.local
+
+# Archivos de desarrollo
+sapde_dev.db
+*.db
+
+# Documentación local
+docs/
+*.md
+
+# Build artifacts
+dist/
+build/

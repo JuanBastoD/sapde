@@ -1,0 +1,76 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+*.whl
+.venv/
+venv/
+env/
+
+# Variables de entorno (NUNCA commitear .env)
+.env
+!.env.example
+
+# Datos (no versionados por tamaño; usar DVC o documentar origen)
+data/raw/*.csv
+data/raw/*.parquet
+data/interim/
+data/processed/
+
+# Modelos entrenados (artefactos grandes)
+models/*.joblib
+models/*.pkl
+models/*.pt
+models/*.h5
+
+# Reportes generados (se regeneran con los scripts)
+reports/*.png
+reports/*.pdf
+reports/*.html
+reports/**/*.png
+reports/**/*.csv
+reports/**/*.html
+reports/**/*.json
+reports/shap/
+reports/validacion/
+
+# Base de datos local
+*.db
+*.sqlite3
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb~
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-*
+
+# Logs
+logs/
+*.log
+
+# C++ build
+etl_cpp/build/
+etl_cpp/*.o
+etl_cpp/*.dll
+etl_cpp/*.so
+etl_cpp/*.pyd
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/

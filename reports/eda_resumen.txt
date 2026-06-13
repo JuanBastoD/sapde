@@ -1,0 +1,42 @@
+============================================================
+SAPDE — Análisis Exploratorio de Datos (OE1)
+============================================================
+
+Total de registros (filas estudiante-semestre): 10,618
+Estudiantes únicos:                             1,500
+Desertores (nivel estudiante):                  426
+Tasa de deserción:                              28.4%
+
+-- Estadisticas por grupo ------------------------------------------
+
+PERMANENTES (n=1074):
+  Promedio acumulado:    3.71 +/- 0.37
+  Tasa de reprobacion:   0.138 +/- 0.190
+  % Avance curricular:   58.2% +/- 17.5%
+  Semestres cursados:    7.4 +/- 1.8
+
+DESERTORES (n=426):
+  Promedio acumulado:    3.32 +/- 0.47
+  Tasa de reprobacion:   0.241 +/- 0.237
+  % Avance curricular:   44.2% +/- 20.4%
+  Semestres cursados:    6.4 +/- 2.3
+
+-- Correlaciones con deserta ----------------------------------------
+  semestre                            r = +0.172
+  semestres_cursados                  r = +0.172
+  promedio_acumulado                  r = -0.152
+  ratio_aprobacion                    r = -0.142
+  deficit_creditos                    r = +0.129
+  promedio_semestre                   r = -0.119
+  porcentaje_avance_real              r = +0.110
+  creditos_aprobados                  r = -0.091
+
+-- Factores de riesgo identificados ----------------------------------
+  1. Promedio acumulado bajo (< 3.2)  -> mayor riesgo
+  2. Alta tasa de reprobacion          -> mayor riesgo
+  3. Bajo avance curricular             -> mayor riesgo
+  4. Tendencia negativa de notas        -> mayor riesgo
+  5. Interrupciones academicas previas  -> mayor riesgo
+
+Graficas generadas en reports/eda_*.png
+============================================================

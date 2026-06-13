@@ -1,0 +1,23 @@
+{
+  "nombre": "ANFIS",
+  "version": 1,
+  "timestamp": "2026-06-12T20:10:03.210074",
+  "umbral": 0.2925217080606256,
+  "metricas": {
+    "modelo": "ANFIS",
+    "precision": 0.1081,
+    "recall": 0.8,
+    "f1_score": 0.1905,
+    "accuracy": 0.7279,
+    "auc_roc": 0.8277,
+    "auc_pr": 0.1556,
+    "umbral": 0.2925,
+    "t_entrenamiento_s": 677.522,
+    "TP": 68,
+    "TN": 1478,
+    "FP": 561,
+    "FN": 17
+  },
+  "mejores_params": {},
+  "archivo": "C:\\Users\\Juanes\\Documents\\Universidad\\9no\\fcpd\\Proyecto\\sapde\\models\\ANFIS_v1.joblib"
+}

@@ -1,0 +1,50 @@
+# ============================================================
+# SAPDE — Imagen Docker: Dashboard Streamlit
+# ============================================================
+FROM python:3.12-slim
+
+LABEL maintainer="SAPDE — Universidad de Pamplona" \
+      description="Dashboard Streamlit para visualización de riesgo estudiantil"
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app/src \
+    PORT=8501
+
+WORKDIR /app
+
+# Dependencias del sistema (mínimas para Streamlit)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Instalar dependencias Python
+COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
+
+# Copiar código fuente
+COPY src/ src/
+
+# Configuración de Streamlit (modo headless, sin telemetría)
+RUN mkdir -p /root/.streamlit
+COPY scripts/streamlit_config.toml /root/.streamlit/config.toml
+
+# Directorios necesarios en runtime
+RUN mkdir -p models reports/shap reports/validacion
+
+# Usuario no-root
+RUN useradd -m -u 1000 sapde \
+    && chown -R sapde:sapde /app \
+    && mkdir -p /home/sapde/.streamlit \
+    && cp /root/.streamlit/config.toml /home/sapde/.streamlit/config.toml \
+    && chown -R sapde:sapde /home/sapde/.streamlit
+USER sapde
+
+EXPOSE ${PORT}
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
+    CMD curl -f http://localhost:${PORT}/_stcore/health || exit 1
+
+CMD ["streamlit", "run", "src/sapde/dashboard/app.py", \
+     "--server.port=8501", "--server.address=0.0.0.0", "--server.headless=true"]

@@ -1,0 +1,28 @@
+{
+  "nombre": "RandomForest",
+  "version": 1,
+  "timestamp": "2026-06-12T20:11:57.602188",
+  "umbral": 0.34505130367998016,
+  "metricas": {
+    "modelo": "RandomForest",
+    "precision": 0.1818,
+    "recall": 0.4,
+    "f1_score": 0.25,
+    "accuracy": 0.904,
+    "auc_roc": 0.8352,
+    "auc_pr": 0.1585,
+    "umbral": 0.3451,
+    "t_entrenamiento_s": 113.711,
+    "TP": 34,
+    "TN": 1886,
+    "FP": 153,
+    "FN": 51
+  },
+  "mejores_params": {
+    "modelo__n_estimators": 200,
+    "modelo__min_samples_leaf": 4,
+    "modelo__max_features": "log2",
+    "modelo__max_depth": 20
+  },
+  "archivo": "C:\\Users\\Juanes\\Documents\\Universidad\\9no\\fcpd\\Proyecto\\sapde\\models\\RandomForest_v1.joblib"
+}

@@ -1,0 +1,26 @@
+{
+  "nombre": "SVM",
+  "version": 3,
+  "timestamp": "2026-06-12T20:19:42.383723",
+  "umbral": 0.23052058227335193,
+  "metricas": {
+    "modelo": "SVM",
+    "precision": 0.0961,
+    "recall": 0.8353,
+    "f1_score": 0.1723,
+    "accuracy": 0.6789,
+    "auc_roc": 0.8367,
+    "auc_pr": 0.1886,
+    "umbral": 0.2305,
+    "t_entrenamiento_s": 332.464,
+    "TP": 71,
+    "TN": 1371,
+    "FP": 668,
+    "FN": 14
+  },
+  "mejores_params": {
+    "modelo__estimator__gamma": 0.01,
+    "modelo__estimator__C": 0.1
+  },
+  "archivo": "C:\\Users\\Juanes\\Documents\\Universidad\\9no\\fcpd\\Proyecto\\sapde\\models\\SVM_v3.joblib"
+}
