@@ -8,7 +8,7 @@
 
 ## Descripción
 
-SAPDE predice la probabilidad de deserción estudiantil por semestre usando cinco técnicas de aprendizaje automático (SVM, Random Forest, LightGBM, MLP, ANFIS), con interpretabilidad SHAP, API REST y dashboard interactivo. Desarrollado como proyecto de grado para la Facultad de Ciencias y Procesos del Conocimiento.
+SAPDE predice la probabilidad de deserción estudiantil por semestre usando cinco técnicas de aprendizaje automático (SVM, Random Forest, LightGBM, MLP, ANFIS), con interpretabilidad SHAP, API REST y dashboard interactivo. Desarrollado como proyecto estudiantil para la Facultad de ingenierías y arquitecturas.
 
 ### Objetivos específicos
 
